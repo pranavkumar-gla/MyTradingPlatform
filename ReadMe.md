@@ -1,18 +1,16 @@
-##user story
+# user story
 As a trader I want to be able to monitor stock prices such 
 that when they breach a trigger level orders can be executed 
 automatically.
 
-Q1. How do i continously monitor?
-
-##Note
+# Note
 The implementation of PriceSource and ExecutionService is out of scope,
 assuming it will be provided by third party. 
 
 You need to listen to price update from PriceSource and act accordingly.
 
-##Exercise
-Given the following interface defination provided  
+# Exercise
+Given the following interface definition provided  
 
 public interface ExecutionService{
     void buy(String security, double price, int volume);

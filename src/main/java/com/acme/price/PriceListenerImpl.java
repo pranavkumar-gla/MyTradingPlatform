@@ -4,6 +4,9 @@ import com.acme.execution.ExecutionService;
 
 public class PriceListenerImpl implements PriceListener{
 
+    private final String BUY="BUY";
+    private final String SELL="SELL";
+
     private ExecutionService executionService;
     private PriceSource priceSource;
 
@@ -25,17 +28,16 @@ public class PriceListenerImpl implements PriceListener{
         this.lotSize = lotSize;
         this.securityName = securityName;
         this.tradeType = tradeType;
-
     }
 
     @Override
     public void priceUpdate(String security, double price) {
 
-        if ( "Buy".equalsIgnoreCase(tradeType) && security.equals(securityName) && price <= this.pricePoint ) {
+        if ( BUY.equalsIgnoreCase(tradeType) && security.equals(securityName) && price <= this.pricePoint ) {
             executionService.buy(securityName, price, lotSize);
             priceSource.removePriceListener(this);
 
-        }else if ( "Sell".equalsIgnoreCase(tradeType) && security.equals(securityName) && price >= this.pricePoint ) {
+        }else if ( SELL.equalsIgnoreCase(tradeType) && security.equals(securityName) && price >= this.pricePoint ) {
             executionService.sell(securityName, price, lotSize);
             priceSource.removePriceListener(this);
         }

@@ -4,7 +4,7 @@ public interface PriceListener {
 
     /*
     This method listen to price provider Ex SCB and get the
-    updated price of a security ex Equity/Bonds
+    updated price of a security.
     */
     void priceUpdate(String security, double price);
 }
