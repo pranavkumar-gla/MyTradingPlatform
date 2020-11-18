@@ -2,6 +2,8 @@ package com.acme.price;
 
 import com.acme.execution.ExecutionService;
 
+import java.util.Objects;
+
 public class PriceListenerImpl implements PriceListener{
 
     private final String BUY="BUY";
@@ -41,5 +43,25 @@ public class PriceListenerImpl implements PriceListener{
             executionService.sell(securityName, price, lotSize);
             priceSource.removePriceListener(this);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PriceListenerImpl that = (PriceListenerImpl) o;
+        return Double.compare(that.pricePoint, pricePoint) == 0 &&
+                lotSize == that.lotSize &&
+                Objects.equals(BUY, that.BUY) &&
+                Objects.equals(SELL, that.SELL) &&
+                Objects.equals(executionService, that.executionService) &&
+                Objects.equals(priceSource, that.priceSource) &&
+                Objects.equals(securityName, that.securityName) &&
+                Objects.equals(tradeType, that.tradeType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(BUY, SELL, executionService, priceSource, pricePoint, lotSize, securityName, tradeType);
     }
 }
